@@ -376,97 +376,101 @@ footer { padding: 80px 0 40px; border-top: 1px solid var(--border); text-align: 
 .delay-2 { transition-delay: 0.4s; }
 .delay-3 { transition-delay: 0.6s; }
 
-/* --- 6. RESPONSIVE (TAMPILAN HP) --- */
-/* --- 6. RESPONSIVE (TAMPILAN HP YANG BENER) --- */
-@media (max-width: 768px) {
-    /* Sembunyikan menu desktop & Tampilkan hamburger */
-    .desktop-only { display: none; }
-/* --- COPY KODE INI KE BAGIAN PALING BAWAH (di dalam Media Query HP) --- */
+/* --- 6. RESPONSIVE (TAMPILAN HP - FINAL FIX) --- */
 @media (max-width: 768px) {
     
-    /* 1. Pastikan Navbar gak lebih lebar dari layar */
-    nav {
-        width: 100%; /* Jangan 100vw, kadang bikin scroll */
-        padding: 0;  /* Reset padding nav induk */
+    /* === 1. NAVIGATION BAR FIX === */
+    /* Sembunyikan menu desktop */
+    .desktop-only, .nav-links { display: none; }
+    
+    /* Munculkan Hamburger */
+    .hamburger { 
+        display: flex; 
+        z-index: 9999; 
+        margin-right: 0; 
     }
-
-    /* 2. Atur Jarak Kiri-Kanan (Padding) Navigasi */
+    
+    /* Reset lebar Navbar biar gak offside */
+    nav { width: 100%; padding: 0; }
+    
+    /* Atur jarak kiri-kanan navbar */
     .nav-wrapper {
         width: 100%;
-        padding: 15px 25px; /* Kiri-Kanan 25px biar gak mepet banget */
+        padding: 15px 20px; /* Jarak aman biar garis 3 gak mepet */
         display: flex;
         justify-content: space-between;
         align-items: center;
-        box-sizing: border-box; /* Pastikan padding gak nambah lebar */
+        box-sizing: border-box;
     }
 
-    /* 3. Pastikan Hamburger Muncul & Posisinya Pas */
-    .hamburger {
-        display: flex;
-        z-index: 9999; /* Pastikan dia paling atas */
-        margin-right: 0; /* Reset margin kalau ada */
-    }
-    
-    /* Fix: Sembunyikan link desktop biar gak ngerusak layout */
-    .nav-links {
-        display: none; 
-    }
-}
-    
-    /* --- HERO SECTION BIAR GAK KAKU --- */
+    /* === 2. HERO SECTION (TOMBOL TENGAH) === */
     .hero { 
-        padding-top: 120px; /* Tambah jarak atas biar gak nabrak navbar */
+        padding-top: 130px; /* Turunin dikit biar lega */
         min-height: auto;
         padding-bottom: 80px;
         display: flex;
-        justify-content: center; /* Tengahin vertikal */
+        justify-content: center;
     }
     
     .hero-content {
         text-align: center;
         width: 100%;
-        display: flex;         /* PENTING: Pakai flex biar align-items jalan */
+        display: flex;
         flex-direction: column;
-        align-items: center;   /* Biar Badge & Tombol beneran di tengah */
+        align-items: center;
     }
 
-    .hero h1 { 
-        font-size: 2.8rem; /* Ukuran pas, gak kegedean gak kekecilan */
-        line-height: 1.2;
-        margin-bottom: 15px;
-    }
-    
-    .hero p {
-        font-size: 1rem;
-        margin-bottom: 30px;
-        padding: 0 10px; /* Kasih napas dikit kiri-kanan */
-    }
+    .hero h1 { font-size: 2.8rem; line-height: 1.2; margin-bottom: 15px; }
+    .hero p { font-size: 1rem; margin-bottom: 30px; padding: 0 10px; }
 
-    /* --- PERBAIKAN TOMBOL (KUNCI UTAMA) --- */
+    /* Fix Tombol "Batako" */
     .cta-group { 
         display: flex;
-        flex-direction: column; /* Tetap numpuk ke bawah */
-        gap: 15px;              /* Jarak antar tombol */
+        flex-direction: column;
+        gap: 15px;
         width: 100%;
-        align-items: center;    /* Pastikan tombol di tengah */
+        align-items: center;
     }
 
     .btn { 
-        width: 100%;            /* Mau full width... */
-        max-width: 280px;       /* TAPI DIBATASI! Biar gak kayak batako */
+        width: 100%;
+        max-width: 280px; /* Ini kuncinya biar tombol gak kegedean */
         text-align: center; 
-        padding: 12px 20px;     /* Sedikit lebih ramping */
+        padding: 12px 20px;
+        margin-top: 0;
     }
 
-    /* Perbaikan Portfolio & Card */
+    /* === 3. PORTOFOLIO & GRID FIX (BIAR GAK KEPOTONG) === */
+    /* Reset Grid jadi 1 kolom penuh */
+    .grid-2, .grid-3 {
+        display: grid;
+        grid-template-columns: 1fr; /* 1 Kolom full */
+        gap: 30px;
+        width: 100%;
+    }
+
+    /* Amankan Container Utama */
+    .container {
+        width: 100%;
+        padding: 0 20px; /* Jarak kiri kanan konten */
+        overflow: hidden; /* Potong yang offside */
+    }
+
+    /* Paksa Kartu & Gambar nurut lebar layar */
+    .dark-card, .portfolio-item {
+        width: 100%;
+        min-width: 0; /* Hapus batasan lebar minimum */
+        margin: 0;
+    }
+
     .portfolio-thumb { height: 200px; }
-    .dark-card { padding: 25px; } 
-    
-    /* Tech Stack jadi rapi */
+    .portfolio-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* === 4. LAIN-LAIN === */
     .tech-stack { 
         justify-content: center; 
-        gap: 15px;
-        flex-wrap: wrap;
-        margin-top: 30px;
+        gap: 15px; 
+        flex-wrap: wrap; 
+        margin-top: 30px; 
     }
 }
