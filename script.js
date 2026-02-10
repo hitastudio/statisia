@@ -31,4 +31,3 @@ function reveal() {
 }
 reveal();
 
-console.log("Dark Premium Ready 🌙");

@@ -425,5 +425,28 @@ footer { padding: 80px 0 40px; border-top: 1px solid var(--border); text-align: 
         justify-content: center; 
         gap: 15px;
     }
+    /* ... kode responsive lainnya ... */
+
+    /* TAMBAHAN: HERO CENTER KHUSUS HP */
+    .hero-content {
+        text-align: center; /* Teks jadi tengah */
+        margin: 0 auto;     /* Kotaknya ditaruh di tengah */
+    }
+    
+    .hero p {
+        margin-left: auto;  /* Paragraf tengah */
+        margin-right: auto;
+        font-size: 1rem;
+    }
+
+    .cta-group {
+        justify-content: center; /* Tombol jadi di tengah */
+        flex-direction: column;  /* Tombol atas-bawah */
+    }
+
+    .tech-stack {
+        justify-content: center; /* Icon di tengah */
+    }
+
 }
 
