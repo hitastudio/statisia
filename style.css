@@ -1,3 +1,9 @@
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Ini kuncinya! Mencegah scroll ke samping */
+    margin: 0;
+    padding: 0;
+}
 /* --- 1. CONFIG & VARIABLES --- */
 :root {
     --bg-main: #020617;       /* Hitam Kebiruan Gelap */
@@ -375,10 +381,37 @@ footer { padding: 80px 0 40px; border-top: 1px solid var(--border); text-align: 
 @media (max-width: 768px) {
     /* Sembunyikan menu desktop & Tampilkan hamburger */
     .desktop-only { display: none; }
-    .hamburger { display: flex; }
+/* --- COPY KODE INI KE BAGIAN PALING BAWAH (di dalam Media Query HP) --- */
+@media (max-width: 768px) {
     
-    /* Perbaikan Navbar */
-    .nav-wrapper { padding: 15px 20px; }
+    /* 1. Pastikan Navbar gak lebih lebar dari layar */
+    nav {
+        width: 100%; /* Jangan 100vw, kadang bikin scroll */
+        padding: 0;  /* Reset padding nav induk */
+    }
+
+    /* 2. Atur Jarak Kiri-Kanan (Padding) Navigasi */
+    .nav-wrapper {
+        width: 100%;
+        padding: 15px 25px; /* Kiri-Kanan 25px biar gak mepet banget */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box; /* Pastikan padding gak nambah lebar */
+    }
+
+    /* 3. Pastikan Hamburger Muncul & Posisinya Pas */
+    .hamburger {
+        display: flex;
+        z-index: 9999; /* Pastikan dia paling atas */
+        margin-right: 0; /* Reset margin kalau ada */
+    }
+    
+    /* Fix: Sembunyikan link desktop biar gak ngerusak layout */
+    .nav-links {
+        display: none; 
+    }
+}
     
     /* --- HERO SECTION BIAR GAK KAKU --- */
     .hero { 
