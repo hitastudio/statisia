@@ -1,0 +1,429 @@
+/* --- 1. CONFIG & VARIABLES --- */
+:root {
+    --bg-main: #020617;       /* Hitam Kebiruan Gelap */
+    --bg-card: rgba(15, 23, 42, 0.6);
+    --primary: #10b981;       /* Emerald Green (Hijau Neon) */
+    --primary-glow: rgba(16, 185, 129, 0.5);
+    --text-main: #f1f5f9;     /* Putih Tulang */
+    --text-muted: #94a3b8;    /* Abu-abu */
+    
+    --border: rgba(255, 255, 255, 0.1);
+    --glass-blur: 20px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Urbanist', sans-serif; scroll-behavior: smooth; }
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* GLOBAL LINK RESET (Biar gak ada ungu/biru nyasar) */
+a { 
+    text-decoration: none; 
+    color: inherit; /* Ikut warna induknya (Putih/Abu) */
+    transition: 0.3s; 
+}
+ul { list-style: none; }
+
+/* --- 2. BACKGROUND ANIMASI (HIJAU RANDOM) --- */
+.gradient-bg {
+    position: fixed; 
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -99; 
+    background: var(--bg-main); 
+    overflow: hidden;
+}
+
+.gradients-container {
+    width: 100%; height: 100%; position: relative;
+    /* Blur dikurangi sedikit biar bentuknya lebih kelihatan */
+    filter: blur(60px); 
+}
+
+/* Settingan Umum Bola */
+.gradients-container div {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.5; /* Agak transparan */
+    mix-blend-mode: screen; /* Agar warnanya menyatu terang */
+}
+
+/* --- VARIASI BOLA & POSISI AWAL --- */
+/* Bola 1: Hijau Tua Besar */
+.g1 { 
+    width: 400px; height: 400px; background: #064e3b; 
+    top: 10%; left: 10%; 
+    animation: floatRandomA 20s infinite alternate ease-in-out;
+}
+
+/* Bola 2: Emerald Neon (Utama) */
+.g2 { 
+    width: 300px; height: 300px; background: #10b981; 
+    bottom: 20%; right: 10%; 
+    animation: floatRandomB 25s infinite alternate-reverse ease-in-out;
+}
+
+/* Bola 3: Teal Cerah */
+.g3 { 
+    width: 250px; height: 250px; background: #059669; 
+    top: 40%; left: 40%; 
+    animation: floatRandomC 22s infinite alternate ease-in-out;
+}
+
+/* Bola 4: Mint Lembut (Kecil Lincah) */
+.g4 { 
+    width: 180px; height: 180px; background: #34d399; 
+    bottom: 10%; left: 20%; 
+    animation: floatRandomA 18s infinite alternate-reverse linear;
+}
+
+/* Bola 5: Hutan Gelap (Besar Lambat) */
+.g5 { 
+    width: 450px; height: 450px; background: #065f46; 
+    top: -10%; right: -10%; 
+    animation: floatRandomB 30s infinite alternate ease-in-out;
+}
+
+
+/* --- KEYFRAMES (RAHASIA GERAKAN RANDOM) --- */
+
+/* Pola A: Gerak Melingkar & Naik Turun */
+@keyframes floatRandomA {
+    0%   { transform: translate(0, 0) rotate(0deg); }
+    33%  { transform: translate(100px, -50px) rotate(120deg); }
+    66%  { transform: translate(-50px, 80px) rotate(240deg); }
+    100% { transform: translate(20px, -100px) rotate(360deg); }
+}
+
+/* Pola B: Gerak Menyilang Diagonal Jauh */
+@keyframes floatRandomB {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(-150px, 150px) scale(1.2); }
+    100% { transform: translate(100px, -100px) scale(0.9); }
+}
+
+/* Pola C: Gerak Zig-Zag Santai */
+@keyframes floatRandomC {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(80px, 80px); }
+    50%  { transform: translate(0, 160px); }
+    75%  { transform: translate(-80px, 80px); }
+    100% { transform: translate(0, 0); }
+}
+
+/* --- 3. NAVBAR & HAMBURGER --- */
+nav {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    border-bottom: 1px solid var(--border);
+    background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(15px);
+}
+.nav-wrapper {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 24px; max-width: 1200px; margin: 0 auto;
+}
+.logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px; color: var(--text-main); }
+.highlight { color: var(--primary); }
+
+.nav-links { display: flex; gap: 30px; }
+.nav-links a { color: var(--text-muted); font-weight: 600; }
+.nav-links a:hover { color: var(--primary); }
+/* --- FIX PRICING ALIGNMENT (TOMBOL RATA BAWAH) --- */
+/* --- FIX PRICING ALIGNMENT (VERSI KUAT) --- */
+.price-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* KUNCI: Pisahkan konten atas dan tombol bawah sejauh mungkin */
+    justify-content: space-between; 
+}
+
+/* Pastikan list fitur mengisi ruang kosong agar tombol terdorong */
+.features-list {
+    margin-bottom: auto;
+    padding-bottom: 20px;
+}
+
+/* Reset margin tombol biar nurut sama parent-nya */
+.price-card .btn,
+.price-card .btn-outline,
+.price-card .btn-primary {
+    margin-top: 0; 
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+/* Hamburger Menu */
+.hamburger {
+    display: none; cursor: pointer; flex-direction: column; gap: 5px;
+    width: 30px; height: 25px; justify-content: center; z-index: 1001;
+}
+.bar { width: 100%; height: 3px; background-color: white; border-radius: 5px; transition: 0.3s; }
+
+/* Menu Mobile */
+.mobile-menu {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background: rgba(2, 6, 23, 0.98);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px;
+    transform: translateY(-100%); transition: transform 0.4s ease; z-index: 999;
+}
+.mobile-menu.active { transform: translateY(0); }
+
+.mobile-link { font-size: 1.5rem; color: white; font-weight: 700; }
+.mobile-link:hover { color: var(--primary); }
+.highlight-link { color: var(--primary); border: 1px solid var(--primary); padding: 10px 30px; border-radius: 50px; }
+
+/* Animasi X Hamburger */
+.hamburger.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+.hamburger.active .bar:nth-child(2) { opacity: 0; }
+.hamburger.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+
+/* --- 4. HERO SECTION --- */
+.hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; position: relative; }
+.hero-content { text-align: left; max-width: 800px; }
+
+.badge {
+    display: inline-block; padding: 8px 16px; border-radius: 50px;
+    background: rgba(16, 185, 129, 0.1); border: 1px solid var(--primary);
+    color: var(--primary); font-size: 0.85rem; font-weight: 700; margin-bottom: 20px;
+}
+.hero h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 20px; font-weight: 800; color: var(--text-main); }
+.text-gradient {
+    background: linear-gradient(to right, #fff, var(--primary));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px; max-width: 600px; }
+
+.cta-group { display: flex; gap: 15px; }
+.btn { padding: 14px 30px; border-radius: 12px; font-weight: 700; display: inline-block; transition: 0.3s; }
+.btn-primary { background: var(--primary); color: #020617; box-shadow: 0 0 20px var(--primary-glow); }
+.btn-primary:hover { background: white; transform: translateY(-3px); }
+.btn-glass { border: 1px solid var(--border); color: white; background: rgba(255,255,255,0.05); }
+.btn-glass:hover { border-color: var(--primary); color: var(--primary); }
+
+.tech-stack { margin-top: 40px; display: flex; gap: 20px; color: var(--text-muted); font-weight: 600; font-size: 0.9rem; }
+.tech-stack span i { margin-right: 5px; color: var(--primary); }
+
+/* --- 5. CARDS --- */
+.section { padding: 100px 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section-header { margin-bottom: 50px; }
+.section-header h2 { font-size: 2.5rem; margin-bottom: 10px; color: var(--text-main); }
+
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; }
+
+.dark-card {
+    background: var(--bg-card); border: 1px solid var(--border); padding: 35px;
+    border-radius: 20px; transition: 0.3s;
+}
+.dark-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+.icon-box {
+    width: 50px; height: 50px; background: rgba(16, 185, 129, 0.1); border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; color: var(--primary); margin-bottom: 20px;
+}
+.dark-card h3 { color: var(--text-main); margin-bottom: 10px; }
+.dark-card p { color: var(--text-muted); }
+
+/* --- PORTFOLIO FIX (Supaya gak biru/ungu) --- */
+.portfolio-item { 
+    display: block; /* Jadi kotak */
+    background: var(--bg-card); 
+    border-radius: 20px; 
+    overflow: hidden; 
+    border: 1px solid var(--border); 
+    text-decoration: none; 
+    color: var(--text-main); /* Paksa warna teks jadi putih */
+    transition: 0.3s;
+}
+.portfolio-item:hover { 
+    transform: translateY(-10px); 
+    border-color: var(--primary); 
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);
+}
+/* --- FIX GAMBAR PORTFOLIO --- */
+.portfolio-thumb {
+    height: 220px;
+    width: 100%;
+    overflow: hidden; /* Agar gambar yang kelebihan dipotong */
+    background: #020617; /* Warna cadangan kalau gambar gagal load */
+    display: flex; align-items: center; justify-content: center;
+}
+
+.portfolio-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Gambar akan memenuhi kotak tanpa gepeng (terpotong sedikit) */
+    object-position: top center; /* Fokus gambar ke bagian atas */
+    transition: 0.5s; /* Efek zoom halus saat di-hover */
+}
+
+/* Efek Zoom saat mouse diarahkan ke kartu */
+.portfolio-item:hover .portfolio-thumb img {
+    transform: scale(1.1); /* Gambar membesar sedikit */
+}
+/* Warna Background Kartu Portfolio (Semua Hijau-ish) */
+.g-green { background: linear-gradient(45deg, #10b981, #34d399); }
+.g-blue  { background: linear-gradient(45deg, #059669, #6ee7b7); } /* Ganti jadi Nuansa Teal/Hijau */
+
+.portfolio-text { padding: 25px; }
+.portfolio-text h3 { color: var(--text-main); margin-bottom: 5px; }
+.portfolio-text p { color: var(--text-muted); font-size: 0.9rem; }
+/* Saat hover, judul jadi hijau */
+.portfolio-item:hover .portfolio-text h3 { color: var(--primary); }
+
+
+/* --- PRICING --- */
+.price { font-size: 3rem; font-weight: 800; margin: 20px 0; color: white; }
+.features-list { list-style: none; margin-bottom: 30px; }
+.features-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: var(--text-muted); }
+.features-list i { color: var(--primary); }
+.full-width { display: block; width: 100%; text-align: center; }
+.btn-outline { border: 1px solid var(--border); color: white; }
+.btn-outline:hover { border-color: var(--primary); background: var(--primary); color: black; }
+
+.featured { border: 1px solid var(--primary); background: linear-gradient(180deg, rgba(16, 185, 129, 0.1), transparent); position: relative; }
+.badge-pop { position: absolute; top: 20px; right: 20px; background: var(--primary); color: black; padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; }
+
+/* --- FAQ --- */
+.faq-wrapper { max-width: 800px; }
+.dark-faq {
+    background: var(--bg-card); border: 1px solid var(--border); padding: 20px;
+    border-radius: 15px; margin-bottom: 15px; cursor: pointer; transition: 0.3s;
+}
+.dark-faq[open] { border-color: var(--primary); }
+.dark-faq summary { font-weight: 700; display: flex; justify-content: space-between; list-style: none; color: var(--text-main); }
+.dark-faq summary::after { content: '+'; color: var(--primary); font-size: 1.2rem; }
+.dark-faq[open] summary::after { content: '-'; }
+.dark-faq p { margin-top: 15px; color: var(--text-muted); }
+
+/* --- FOOTER --- */
+footer { padding: 80px 0 40px; border-top: 1px solid var(--border); text-align: center; margin-top: 50px; }
+.footer-box h2 { color: var(--text-main); }
+.footer-box p { color: var(--text-muted); }
+.btn-whatsapp { background: #25D366; color: white; font-size: 1.1rem; margin-top: 20px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 0 20px rgba(37, 211, 102, 0.3); }
+.btn-whatsapp:hover { background: #128C7E; transform: translateY(-3px); }
+.copyright { margin-top: 50px; color: var(--text-muted); font-size: 0.9rem; }
+
+/* --- ANIMASI & RESPONSIVE --- */
+.fade-in { opacity: 0; transform: translateY(30px); animation: fade 1s forwards; }
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+@keyframes fade { to { opacity: 1; transform: translateY(0); } }
+
+/* --- ANIMASI SCROLL REVEAL (VARIASI LENGKAP) --- */
+
+/* 1. Base Class (Wajib ada) */
+.scroll-reveal {
+    opacity: 0;
+    transition: 1s cubic-bezier(0.5, 0, 0, 1); /* Efek gerak lebih smooth */
+    
+    /* Default: Muncul dari Bawah (kalau gak dikasih class tambahan) */
+    transform: translateY(50px);
+}
+
+/* 2. State ACTIVE (Saat elemen muncul di layar) */
+.scroll-reveal.active {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0deg); /* Reset ke posisi normal */
+}
+
+/* --- VARIASI ARAH (MODIFIER) --- */
+
+/* Muncul dari KIRI */
+.from-left {
+    transform: translateX(-100px);
+}
+
+/* Muncul dari KANAN */
+.from-right {
+    transform: translateX(100px);
+}
+
+/* Muncul dari ATAS */
+.from-top {
+    transform: translateY(-50px);
+}
+
+/* Efek ZOOM IN (Membesar) */
+.zoom-in {
+    transform: scale(0.5);
+}
+
+/* Efek ZOOM OUT (Mengecil) */
+.zoom-out {
+    transform: scale(1.2);
+}
+
+/* Efek MUTER (Spin) */
+.rotate-in {
+    transform: rotate(-180deg) scale(0.5);
+}
+
+/* --- DELAY (Biar munculnya gantian) --- */
+.delay-1 { transition-delay: 0.2s; }
+.delay-2 { transition-delay: 0.4s; }
+.delay-3 { transition-delay: 0.6s; }
+
+/* --- 6. RESPONSIVE (TAMPILAN HP) --- */
+@media (max-width: 768px) {
+    /* Sembunyikan menu desktop & Tampilkan hamburger */
+    .desktop-only { display: none; }
+    .hamburger { display: flex; }
+    
+    /* Perbaikan Navbar */
+    .nav-wrapper { 
+        padding: 15px 20px; /* Perkecil padding navbar */
+    }
+    
+    /* Perbaikan Hero Section (Biar gak kegedean) */
+    .hero { 
+        padding-top: 100px; /* Kurangi jarak atas */
+        min-height: auto;   /* Hapus tinggi minimum layar penuh */
+        padding-bottom: 60px; /* Tambah jarak bawah dikit */
+    }
+    
+    .hero h1 { 
+        font-size: 2.5rem; /* Perkecil font judul (tadinya 4rem/3rem) */
+        line-height: 1.2;
+    }
+    
+    .hero p {
+        font-size: 1rem; /* Perkecil font deskripsi */
+    }
+
+    /* Perkecil jarak antar elemen */
+    .section { padding: 60px 0; } /* Jarak antar section diperkecil */
+    .section-header { margin-bottom: 30px; }
+    .section-header h2 { font-size: 2rem; }
+
+    /* Tombol Full Width di HP */
+    .cta-group { 
+        flex-direction: column; /* Tombol jadi atas-bawah */
+        width: 100%; 
+    }
+    .btn { 
+        width: 100%; 
+        text-align: center; 
+    }
+
+    /* Perbaikan Portfolio & Card */
+    .portfolio-thumb { height: 180px; } /* Perkecil tinggi gambar portfolio */
+    
+    /* Pricing agar tidak terlalu lebar */
+    .pricing-grid { gap: 20px; }
+    .dark-card { padding: 25px; } /* Kurangi padding dalam kartu */
+    
+    /* Tech Stack jadi 2 baris rapi */
+    .tech-stack { 
+        flex-wrap: wrap; 
+        justify-content: center; 
+        gap: 15px;
+    }
+}
+
