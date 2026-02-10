@@ -371,82 +371,69 @@ footer { padding: 80px 0 40px; border-top: 1px solid var(--border); text-align: 
 .delay-3 { transition-delay: 0.6s; }
 
 /* --- 6. RESPONSIVE (TAMPILAN HP) --- */
+/* --- 6. RESPONSIVE (TAMPILAN HP YANG BENER) --- */
 @media (max-width: 768px) {
     /* Sembunyikan menu desktop & Tampilkan hamburger */
     .desktop-only { display: none; }
     .hamburger { display: flex; }
     
     /* Perbaikan Navbar */
-    .nav-wrapper { 
-        padding: 15px 20px; /* Perkecil padding navbar */
-    }
+    .nav-wrapper { padding: 15px 20px; }
     
-    /* Perbaikan Hero Section (Biar gak kegedean) */
+    /* --- HERO SECTION BIAR GAK KAKU --- */
     .hero { 
-        padding-top: 100px; /* Kurangi jarak atas */
-        min-height: auto;   /* Hapus tinggi minimum layar penuh */
-        padding-bottom: 60px; /* Tambah jarak bawah dikit */
+        padding-top: 120px; /* Tambah jarak atas biar gak nabrak navbar */
+        min-height: auto;
+        padding-bottom: 80px;
+        display: flex;
+        justify-content: center; /* Tengahin vertikal */
     }
     
+    .hero-content {
+        text-align: center;
+        width: 100%;
+        display: flex;         /* PENTING: Pakai flex biar align-items jalan */
+        flex-direction: column;
+        align-items: center;   /* Biar Badge & Tombol beneran di tengah */
+    }
+
     .hero h1 { 
-        font-size: 2.5rem; /* Perkecil font judul (tadinya 4rem/3rem) */
+        font-size: 2.8rem; /* Ukuran pas, gak kegedean gak kekecilan */
         line-height: 1.2;
+        margin-bottom: 15px;
     }
     
     .hero p {
-        font-size: 1rem; /* Perkecil font deskripsi */
+        font-size: 1rem;
+        margin-bottom: 30px;
+        padding: 0 10px; /* Kasih napas dikit kiri-kanan */
     }
 
-    /* Perkecil jarak antar elemen */
-    .section { padding: 60px 0; } /* Jarak antar section diperkecil */
-    .section-header { margin-bottom: 30px; }
-    .section-header h2 { font-size: 2rem; }
-
-    /* Tombol Full Width di HP */
+    /* --- PERBAIKAN TOMBOL (KUNCI UTAMA) --- */
     .cta-group { 
-        flex-direction: column; /* Tombol jadi atas-bawah */
-        width: 100%; 
+        display: flex;
+        flex-direction: column; /* Tetap numpuk ke bawah */
+        gap: 15px;              /* Jarak antar tombol */
+        width: 100%;
+        align-items: center;    /* Pastikan tombol di tengah */
     }
+
     .btn { 
-        width: 100%; 
+        width: 100%;            /* Mau full width... */
+        max-width: 280px;       /* TAPI DIBATASI! Biar gak kayak batako */
         text-align: center; 
+        padding: 12px 20px;     /* Sedikit lebih ramping */
     }
 
     /* Perbaikan Portfolio & Card */
-    .portfolio-thumb { height: 180px; } /* Perkecil tinggi gambar portfolio */
+    .portfolio-thumb { height: 200px; }
+    .dark-card { padding: 25px; } 
     
-    /* Pricing agar tidak terlalu lebar */
-    .pricing-grid { gap: 20px; }
-    .dark-card { padding: 25px; } /* Kurangi padding dalam kartu */
-    
-    /* Tech Stack jadi 2 baris rapi */
+    /* Tech Stack jadi rapi */
     .tech-stack { 
-        flex-wrap: wrap; 
         justify-content: center; 
         gap: 15px;
+        flex-wrap: wrap;
+        margin-top: 30px;
     }
-    /* ... kode responsive lainnya ... */
-
-    /* TAMBAHAN: HERO CENTER KHUSUS HP */
-    .hero-content {
-        text-align: center; /* Teks jadi tengah */
-        margin: 0 auto;     /* Kotaknya ditaruh di tengah */
-    }
-    
-    .hero p {
-        margin-left: auto;  /* Paragraf tengah */
-        margin-right: auto;
-        font-size: 1rem;
-    }
-
-    .cta-group {
-        justify-content: center; /* Tombol jadi di tengah */
-        flex-direction: column;  /* Tombol atas-bawah */
-    }
-
-    .tech-stack {
-        justify-content: center; /* Icon di tengah */
-    }
-
 }
-
